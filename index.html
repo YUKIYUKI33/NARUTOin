@@ -65,7 +65,8 @@
 
         // run the webcam image through the image model
             async function predict() {
-                document.getElementById('mypic').src = in_img[3];
+                var imn = goukakyuu[in_number];
+                document.getElementById('mypic').src = in_img[imn];
             // predict can take in an image, video or canvas html element
             var value = 0;
             var index = 0;
