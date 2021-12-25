@@ -63,7 +63,7 @@
 
         // run the webcam image through the image model
             async function predict() {
-                document.getElementById('mypic').src = in_img[in_number];
+                document.getElementById('mypic').src = in_img[goukakyuu[in_number]];
             // predict can take in an image, video or canvas html element
             var value = 0;
             var index = 0;
@@ -83,7 +83,7 @@
                 }
 
             labelContainer.childNodes[13].innerHTML = prediction[index].className;
-            if (goukakyuu[in_number] == index[in_number]) {
+            if (goukakyuu[in_number] == index) {
                 if (value > 0.80) {
                 in_number++
                 }
