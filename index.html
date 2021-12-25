@@ -51,7 +51,9 @@
             for (let i = 0; i < maxPredictions + 1; i++) { // and class labels
                 labelContainer.appendChild(document.createElement("div"));
             }
-    }
+            }
+
+            const goukakyuu = [5,7,8,11,6,2];//–¤¨–¢¨\¨ˆå¨Œß¨“Ð
             var in_number = 0;
             const in_img = ["in_img/ne.png", "in_img/usi.png", "in_img/tora.png", "in_img/u.png", "in_img/tatu.png", "in_img/mi.png","in_img/uma.png", "in_img/hituji.png", "in_img/saru.png", "in_img/tori.png", "in_img/inu.png", "in_img/i.png" ]
 
@@ -63,11 +65,10 @@
 
         // run the webcam image through the image model
             async function predict() {
-                document.getElementById('mypic').src = in_img[in_number];
+                document.getElementById('mypic').src = in_img[goukakyuu[in_number]];
             // predict can take in an image, video or canvas html element
             var value = 0;
             var index = 0;
-            const goukakyuu = [5,7,8,11,6,2];//–¤¨–¢¨\¨ˆå¨Œß¨“Ð
             const prediction = await model.predict(webcam.canvas);
 
             for (let i = 0; i < maxPredictions; i++) {
