@@ -56,7 +56,7 @@
 
             const goukakyuu = [5, 7, 8, 11, 6, 2];//–¤¨–¢¨\¨ˆå¨Œß¨“Ð
             var in_number = 0;
-            //const in_jpn = ["Žq", "‰N", "“Ð", "‰K", "’C", "–¤", "Œß", "–¢", "\", "“Ñ", "œú", "ˆå"];
+            const in_jpn = ["Žq", "‰N", "“Ð", "‰K", "’C", "–¤", "Œß", "–¢", "\", "“Ñ", "œú", "ˆå"];
             const in_img = ["in_img/ne.png", "in_img/usi.png", "in_img/tora.png", "in_img/u.png", "in_img/tatu.png", "in_img/mi.png", "in_img/uma.png", "in_img/hituji.png", "in_img/saru.png", "in_img/tori.png", "in_img/inu.png", "in_img/i.png"];
 
         async function loop() {
@@ -88,16 +88,16 @@
 
                 labelContainer.childNodes[13].innerHTML = prediction[index].className;
                 if (goukakyuu[in_number] == index && value > 0.80) {
-                    //var audio = new Audio("kaze.mp3");
-                    //audio.play();
-                    //var x = document.getElementById("daimoji");
-                    //x.innerHTML = in_jpn[imn];
+                    var audio = new Audio("kaze.mp3");
+                    audio.play();
+                    var x = document.getElementById("daimoji");
+                    x.innerHTML = in_jpn[imn];
                     in_number++;
                 }
-                //if (goukakyuu.length = in_number) {
-                    //audio = new Audio("kan.mp3");
-                    //audio.play();
-                //}
+                if (goukakyuu.length = in_number) {
+                    audio = new Audio("kan.mp3");
+                    audio.play();
+                }
             }
         </script>
 
