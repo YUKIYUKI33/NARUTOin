@@ -13,7 +13,7 @@
         <button type="button" onclick="init()">Start</button>
     </div>
     <div id="webcam-container" align="center">
-        <img id="mypic" src="dack.jpg" width="200" height="200"></div >
+        <img id="mypic" width="200" height="200"></div >
                     <div id="label-container" align="center"></div>
                         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
@@ -50,8 +50,10 @@
             labelContainer = document.getElementById("label-container");
             for (let i = 0; i < maxPredictions + 1; i++) { // and class labels
                 labelContainer.appendChild(document.createElement("div"));
-        }
+            }
     }
+            var in_number = 0;
+            const in_img = ["in_img/ne.png", "in_img/usi.png", "in_img/tora.png", "in_img/u.png", "in_img/tatu.png", "in_img/mi.png","in_img/uma.png", "in_img/hituji.png", "in_img/saru.png", "in_img/tori.png", "in_img/inu.png", "in_img/i.png" ]
 
         async function loop() {
                 webcam.update(); // update the webcam frame
@@ -60,21 +62,32 @@
         }
 
         // run the webcam image through the image model
-        async function predict() {
+            async function predict() {
+                document.getElementById('mypic').src = in_img[in_number];
             // predict can take in an image, video or canvas html element
             var value = 0;
             var index = 0;
+            const goukakyuu = [5,7,8,11,6,2];//–¤¨–¢¨\¨ˆå¨Œß¨“Ð
             const prediction = await model.predict(webcam.canvas);
+
             for (let i = 0; i < maxPredictions; i++) {
+
                 if (value < prediction[i].probability.toFixed(2)) {
                 value = prediction[i].probability.toFixed(2);
-            index = i;
-        }
-        const classPrediction =
+                index = i;
+                }
+
+            const classPrediction =
             prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        labelContainer.childNodes[i].innerHTML = classPrediction;
-    }
-    labelContainer.childNodes[13].innerHTML = prediction[index].className;
+            labelContainer.childNodes[i].innerHTML = classPrediction;
+                }
+
+            labelContainer.childNodes[13].innerHTML = prediction[index].className;
+            if (goukakyuu[in_number] == index[in_number]) {
+                if (value > 0.80) {
+                in_number++
+                }
+            }
 }
         </script>
 
