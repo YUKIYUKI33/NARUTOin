@@ -9,25 +9,27 @@
 </head>
 <body>
     <div align="center">NARUTO‰C‚ðŒ‹‚Ú‚¤</div>
+    <div id="daimoji" align="center">a</div>
     <div align="center">
         <button type="button" onclick="init()">Start</button>
     </div>
     <div id="webcam-container" align="center">
-        <img id="mypic" width="200" height="200"></div >
-                    <div id="label-container" align="center"></div>
-         <div id="daimoji" align="center">a</div>
-                        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
-        <script type="text/javascript">
-            // More API functions here:
-            // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+        <img id="mypic" width="200" height="200">
+    </div>
+    <div id="label-container" align="center"></div>
 
-            // the link to your model provided by Teachable Machine export panel
-            const URL = "./my_model/";
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+    <script type="text/javascript">
+        // More API functions here:
+        // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
-            let model, webcam, labelContainer, maxPredictions;
+        // the link to your model provided by Teachable Machine export panel
+        const URL = "./my_model/";
 
-            // Load the image model and setup the webcam
+        let model, webcam, labelContainer, maxPredictions;
+
+        // Load the image model and setup the webcam
         async function init() {
             const modelURL = URL + "model.json";
             const metadataURL = URL + "metadata.json";
@@ -52,23 +54,23 @@
             for (let i = 0; i < maxPredictions + 1; i++) { // and class labels
                 labelContainer.appendChild(document.createElement("div"));
             }
-            }
+        }
 
-            const goukakyuu = [5, 7, 8, 11, 6, 2];//–¤¨–¢¨\¨ˆå¨Œß¨“Ð
-            var in_number = 0;
-            const in_jpn = ["Žq", "‰N", "“Ð", "‰K", "’C", "–¤", "Œß", "–¢", "\", "“Ñ", "œú", "ˆå"];
-            const in_img = ["in_img/ne.png", "in_img/usi.png", "in_img/tora.png", "in_img/u.png", "in_img/tatu.png", "in_img/mi.png", "in_img/uma.png", "in_img/hituji.png", "in_img/saru.png", "in_img/tori.png", "in_img/inu.png", "in_img/i.png"];
+        const goukakyuu = [5, 7, 8, 11, 6, 2];//–¤¨–¢¨\¨ˆå¨Œß¨“Ð
+        var in_number = 0;
+        const in_jpn = ["Žq", "‰N", "“Ð", "‰K", "’C", "–¤", "Œß", "–¢", "\", "“Ñ", "œú", "ˆå"];
+        const in_img = ["in_img/ne.png", "in_img/usi.png", "in_img/tora.png", "in_img/u.png", "in_img/tatu.png", "in_img/mi.png", "in_img/uma.png", "in_img/hituji.png", "in_img/saru.png", "in_img/tori.png", "in_img/inu.png", "in_img/i.png"];
 
         async function loop() {
-                webcam.update(); // update the webcam frame
+            webcam.update(); // update the webcam frame
             await predict();
             window.requestAnimationFrame(loop);
         }
 
         // run the webcam image through the image model
-            async function predict() {
-                var imn = goukakyuu[in_number];
-                document.getElementById('mypic').src = in_img[imn];
+        async function predict() {
+            var imn = goukakyuu[in_number];
+            document.getElementById('mypic').src = in_img[imn];
             // predict can take in an image, video or canvas html element
             var value = 0;
             var index = 0;
@@ -77,29 +79,29 @@
             for (let i = 0; i < maxPredictions; i++) {
 
                 if (value < prediction[i].probability.toFixed(2)) {
-                value = prediction[i].probability.toFixed(2);
-                index = i;
+                    value = prediction[i].probability.toFixed(2);
+                    index = i;
                 }
 
-            const classPrediction =
-            prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-            labelContainer.childNodes[i].innerHTML = classPrediction;
-                }
-
-                labelContainer.childNodes[13].innerHTML = prediction[index].className;
-                if (goukakyuu[in_number] == index && value > 0.80) {
-                    var audio = new Audio("kaze.mp3");
-                    audio.play();
-                    var x = document.getElementById("daimoji");
-                    x.innerHTML = in_jpn[imn];
-                    in_number++;
-                }
-                if (goukakyuu.length == in_number) {
-                    var audio = new Audio("kan.mp3");
-                    audio.play();
-                }
+                const classPrediction =
+                    prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                labelContainer.childNodes[i].innerHTML = classPrediction;
             }
-        </script>
+
+            labelContainer.childNodes[13].innerHTML = prediction[index].className;
+            if (goukakyuu[in_number] == index && value > 0.80) {
+                var audio = new Audio("kaze.mp3");
+                audio.play();
+                var x = document.getElementById("daimoji");
+                x.innerHTML = prediction[imn].className;
+                in_number++;
+            }
+            if (goukakyuu.length == in_number) {
+                var audio = new Audio("kan.mp3");
+                audio.play();
+            }
+        }
+    </script>
 
 </body>
 </html>
