@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
     <link href="index.css" rel="stylesheet" />
 </head>
 <body>
-    <div align="center">NARUTO‰CŒ‹‚ÑƒQ[ƒ€</div>
+    <div align="center">NARUTO‰C‚ğŒ‹‚Ú‚¤</div>
     <div align="center">
         <button type="button" onclick="init()">Start</button>
     </div>
@@ -62,6 +62,9 @@
             async function predict() {
                 // predict can take in an image, video or canvas html element
                 const prediction = await model.predict(webcam.canvas);
+                if (prediction[13].probability.toFixed(2) > 0.8) {
+                    labelContainer.childNodes[13].innerHTML = "q[Œ‹‚ñ‚Å‚Ü‚·"
+                }
                 for (let i = 0; i < maxPredictions; i++) {
                     const classPrediction =
                         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
