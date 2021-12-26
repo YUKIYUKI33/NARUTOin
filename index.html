@@ -9,6 +9,12 @@
 </head>
 <body>
     <div align="center">NARUTOdeNINNIN</div>
+    <audio id="kaze" preload="auto">
+        <source src="kaze.mp3" type="audio/mp3">
+    </audio>
+    <audio id="kan" preload="auto">
+        <source src="kan.mp3" type="audio/mp3">
+    </audio>
     <div align="center">
         <button type="button" onclick="init()">Start</button>
     </div>
@@ -87,16 +93,14 @@
 
             labelContainer.childNodes[13].innerHTML = prediction[index].className;
             if (goukakyuu[in_number] == index && value > 0.80) {
-                //var audio = new Audio("kaze.mp3");
-                //audio.play();
+                document.getElementById("kaze.mp3").play();
                 //var x = document.getElementById("daimoji");
                 //x.innerHTML = prediction[imn].className;
                 in_number++;
             }
-            //if (goukakyuu.length == in_number) {
-                //var audio = new Audio("kan.mp3");
-                //audio.play();
-            //}
+            if (goukakyuu.length == in_number) {
+                document.getElementById("kan.mp3").play();
+            }
         }
     </script>
 
