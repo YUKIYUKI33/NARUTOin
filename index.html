@@ -93,13 +93,14 @@
 
             labelContainer.childNodes[13].innerHTML = prediction[index].className;
             if (goukakyuu[in_number] == index && value > 0.80) {
-                document.getElementById("kaze.mp3").play();
+                //document.getElementById("kaze.mp3").play();
                 //var x = document.getElementById("daimoji");
                 //x.innerHTML = prediction[imn].className;
                 in_number++;
             }
-            if (goukakyuu.length == in_number) {
-                document.getElementById("kan.mp3").play();
+            else if (goukakyuu.length == in_number) {
+                //document.getElementById("kan.mp3").play();
+                window.location.href = "./crear.html";
             }
         }
     </script>
